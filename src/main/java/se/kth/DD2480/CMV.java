@@ -36,11 +36,16 @@ public class CMV {
             double sideB = b.distance(c);
             double sideC = c.distance(a);
             double area = Point.triangleArea(a, b, c);
-
-            //r = abc/4A
-            double circumradius = (sideA*sideB*sideC)/(4*area);
-            if (circumradius > RADIUS1) {
-                return true;
+            if (area < 0.000001) {
+                if (sideA/2 > RADIUS1 || sideB/2 > RADIUS1 || sideC/2 > RADIUS1) {
+                    return true;
+                }
+            } else {
+                //r = abc/4A
+                double circumradius = (sideA*sideB*sideC)/(4*area);
+                if (circumradius > RADIUS1) {
+                    return true;
+                }
             }
         }
         return false;
