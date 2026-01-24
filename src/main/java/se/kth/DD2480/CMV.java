@@ -26,7 +26,7 @@ public class CMV {
         if(points == null || NUMPOINTS < 3) {
             return false;
         }
-        for (int i = 0; i < NUMPOINTS-3; i++) {
+        for (int i = 0; i < NUMPOINTS-2; i++) {
 
             //r = abc/4A where r is radius of the triangles Circumcircle, a,b,c is the length of the sides between the points and A is the triangles Area
             Point a = points[i];
