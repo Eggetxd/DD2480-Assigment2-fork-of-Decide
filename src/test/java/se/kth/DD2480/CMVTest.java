@@ -53,14 +53,14 @@ class CMVTest {
     }
 
     @Test
-    void lic1_valid() {
+    void lic1_returnsTrue_whenRadiusBiggerThanRADIUS1() {
         CMV cmv = new CMV();
         Point p1 = new Point(0,0);
         Point p2 = new Point(1,0);
         Point p3 = new Point(10,0);
         Point p4 = new Point(0,10);
         Point[] points = {p1, p2, p3, p4};
-        assertTrue(cmv.lic1(points, 4, 10));
+        assertTrue(cmv.lic1(points, 4, 5));
     }
 
 
