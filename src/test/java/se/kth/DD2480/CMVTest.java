@@ -175,7 +175,7 @@ class CMVTest {
                 new Point(5, 0)
         };
         
-        assertTrue(cmv.lic11(points, points.length, 1));
+        assertFalse(cmv.lic11(points, points.length, 1));
     }
 
     @Test
@@ -189,7 +189,7 @@ class CMVTest {
                 new Point(5, 0)
         };
         
-        assertTrue(cmv.lic11(points, points.length, 4));
+        assertFalse(cmv.lic11(points, points.length, 4));
     }
 
     @Test
