@@ -139,7 +139,7 @@ public class CMV {
 
         cmv[0] = lic0(points, p.LENGTH1, NUMPOINTS);
         cmv[1] = lic1();
-        cmv[2] = lic2();
+        cmv[2] = lic2(points, NUMPOINTS, 3.1415926535, p.EPSILON); // PI might be up for change in future
         cmv[3] = lic3();
         cmv[4] = lic4();
         cmv[5] = lic5(points, NUMPOINTS);
