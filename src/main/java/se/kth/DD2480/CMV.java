@@ -77,7 +77,17 @@ public class CMV {
         return false;
     }
 
-    boolean lic7() {
+    boolean lic7(Point[] points, int NUMPOINTS, double LENGTH1, int K_PTS) {
+        if (points == null || NUMPOINTS < 3 || points.length < NUMPOINTS || K_PTS < 1)
+            return false;
+
+        for (int i = 0; i < NUMPOINTS - K_PTS - 1; i++) {
+            Point a = points[i];
+            Point b = points[i + K_PTS + 1];
+
+            if (a.distance(b) > LENGTH1)
+                return true;
+        }
         return false;
     }
 
