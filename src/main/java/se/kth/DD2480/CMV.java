@@ -53,10 +53,6 @@ public class CMV {
 
             double angle = Math.acos(cos);
 
-            System.out.println("Angle: " + angle);
-            System.out.println("Pi: " + PI);
-
-
             if (angle < (PI - EPSILON) || angle > (PI + EPSILON))
                 return true;
         }
