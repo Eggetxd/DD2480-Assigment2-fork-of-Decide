@@ -76,6 +76,13 @@ class CMVTest {
     }
 
     @Test
+    void lic2_returnsFalse_whenInputParametersAreWrong() {
+        Point[] straightLine = {new Point(0, 0), new Point(1, 1), new Point(2, 2)};
+
+        assertFalse(cmv.lic2(straightLine, 3, 3.1415926535, 0.000001)); // Points, NUMPOINTS, PI, EPSILON
+    }
+
+    @Test
     void lic3() {
     }
 
