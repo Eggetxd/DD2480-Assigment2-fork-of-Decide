@@ -133,7 +133,7 @@ public class CMV {
         cmv[3] = lic3();
         cmv[4] = lic4();
         cmv[5] = lic5(points, NUMPOINTS);
-        cmv[6] = lic6();
+        cmv[6] = lic6(points, NUMPOINTS, p.N_PTS, p.DIST);
         cmv[7] = lic7();
         cmv[8] = lic8();
         cmv[9] = lic9();
