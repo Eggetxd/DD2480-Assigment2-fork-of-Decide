@@ -59,6 +59,13 @@ class CMVTest {
     }
 
     @Test
+    void lic2_returnsFalse_whenPointsCollide() {
+        Point[] collidingPoints = {new Point(0, 1), new Point(0, 0), new Point(0, 0)};
+
+        assertFalse(cmv.lic2(collidingPoints, 3, 3.1415926535, 0.000001)); // Points, NUMPOINTS, PI, EPSILON
+    }
+
+    @Test
     void lic3() {
     }
 
