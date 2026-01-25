@@ -26,7 +26,40 @@ public class CMV {
         return false;
     }
 
-    boolean lic2() {
+    boolean lic2(Point[] points, int NUMPOINTS, double PI, double EPSILON) {
+
+        if (points == null || points.length < 3 || NUMPOINTS > points.length)
+            return false;
+
+        for (int i = 1; i < NUMPOINTS - 1; i++) {
+            Point a = points[i - 1];
+            Point b = points[i];
+            Point c = points[i + 1];
+
+            double ab = a.distance(b);
+            double cb = b.distance(c);
+
+            // If either a or c coincides with b we skip to next triplet or points
+            if (ab < 0.000001 || cb < 0.000001)
+                continue;
+
+            // Vectors
+            Point u = new Point(a.x - b.x, a.y - b.y);
+            Point v = new Point(c.x - b.x, c.y - b.y);
+
+            double numerator    = u.x*v.x + u.y*v.y;
+            double denominator  = ab * cb;
+            double cos = numerator / denominator;
+
+            double angle = Math.acos(cos);
+
+            System.out.println("Angle: " + angle);
+            System.out.println("Pi: " + PI);
+
+
+            if (angle < (PI - EPSILON) || angle > (PI + EPSILON))
+                return true;
+        }
         return false;
     }
 
