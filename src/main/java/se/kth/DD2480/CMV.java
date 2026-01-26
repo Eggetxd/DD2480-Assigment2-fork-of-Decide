@@ -169,8 +169,24 @@ public class CMV {
         return false;
     }
 
-    boolean lic13() {
-        return false;
+    boolean lic13(Point[] points, int NUMPOINTS, int A_PTS, int B_PTS, double RADIUS1, double RADIUS2) {
+        if (points == null || NUMPOINTS < 5 || A_PTS < 1 || B_PTS < 1
+                || (NUMPOINTS - 3) < (A_PTS + B_PTS))  return false;
+
+        boolean radius1Contains = true;
+        boolean radius2Contains = false;
+
+        for (int i = 0; i <= NUMPOINTS - 3 - (A_PTS + B_PTS); ++i) {
+            Point a = points[i];
+            Point b = points[i + A_PTS + 1];
+            Point c = points[i + A_PTS + B_PTS + 2];
+
+            double mecRadius = Point.minimalEnclosingCircleRadius(a, b, c);
+            if (mecRadius > RADIUS1) radius1Contains = false;
+            if (mecRadius <= RADIUS2) radius2Contains = true;
+        }
+
+        return !radius1Contains && radius2Contains;
     }
 
     boolean lic14() {
@@ -198,7 +214,7 @@ public class CMV {
         cmv[10] = lic10(points,p.E_PTS,p.F_PTS,p.AREA1,NUMPOINTS);
         cmv[11] = lic11(points, NUMPOINTS, p.G_PTS);
         cmv[12] = lic12();
-        cmv[13] = lic13();
+        cmv[13] = lic13(points, NUMPOINTS, p.A_PTS, p.B_PTS, p.RADIUS1, p.RADIUS2);
         cmv[14] = lic14();
         cmv[15] = lic15();
 
