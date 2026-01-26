@@ -540,7 +540,69 @@ class CMVTest {
     }
 
     @Test
-    void lic13() {
+    void lic13_returnsFalse_radius1CannotContain_radius2CannotContain() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0),
+                new Point(4, 0)
+        };
+        assertFalse(cmv.lic13(points, points.length, 1, 1, 1.0, 1.0));
+    }
+
+    @Test
+    void lic13_returnsFalse_radius1CanContain_radius2CanContain() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0),
+                new Point(4, 0)
+        };
+        assertFalse(cmv.lic13(points, points.length, 1, 1, 3.0, 3.0));
+    }
+
+    @Test
+    void lic13_returnsFalse_radius1CanContain_radius2CannotContain() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0),
+                new Point(4, 0)
+        };
+        assertFalse(cmv.lic13(points, points.length, 1, 1, 3.0, 1.0));
+    }
+
+    @Test
+    void lic13_returnsTrue_sameTripletSatisfiesBothConditions() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0),
+                new Point(4, 0)
+        };
+        assertTrue(cmv.lic13(points, points.length, 1, 1, 1.0, 3.0));
+    }
+
+    @Test
+    void lic13_returnsTrue_differentTripletsSatisfyBothConditions() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(0, 0),
+                new Point(2, 0),
+                new Point(100, 0),
+                new Point(4, 0),
+                new Point(200, 0)
+        };
+        assertTrue(cmv.lic13(points, points.length, 1, 1, 99.0, 2.0));
     }
 
     @Test
