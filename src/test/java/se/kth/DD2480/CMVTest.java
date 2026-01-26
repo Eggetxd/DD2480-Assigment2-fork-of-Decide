@@ -220,7 +220,55 @@ class CMVTest {
 
 
     @Test
-    void lic6() {
+    void lic6_returnsFalseForNoPointFurtherAwayThanDist() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(0, 0),
+                new Point(0, 3)
+        };
+
+        assertFalse(cmv.lic6(points, points.length, 3, 2.0));
+    }
+
+    @Test
+    void lic6_returnsFalseForNegativeDist() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(3, 0),
+                new Point(1, 0)
+        };
+
+        assertFalse(cmv.lic6(points, points.length, 3, -1));
+    }
+
+    @Test
+    void lic6_returnsFalseForN_PTSBeingLargerThanNUMPOINTS() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(3, 0),
+                new Point(1, 0)
+        };
+
+        assertFalse(cmv.lic6(points, points.length, 5, 1));
+    }
+
+    @Test
+    void lic6_returnsTrueForLastThreeElements() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(3, 0),
+                new Point(1, 0)
+        };
+
+        assertTrue(cmv.lic6(points, points.length, 3, 1));
     }
 
     @Test
