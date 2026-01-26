@@ -330,7 +330,107 @@ class CMVTest {
     }
 
     @Test
-    void lic8() {
+    void lic8_returnsFalse_whenPointsFitWithinRadius1() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0),
+                new Point(4, 0)
+        };
+        assertFalse(cmv.lic8(points, points.length, 1, 1, 10.0));
+    }
+
+    @Test
+    void lic8_returnsFalse_whenPointsFitOnRadius1() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(2, 0),
+                new Point(4, 0),
+                new Point(6, 0),
+                new Point(8, 0)
+        };
+        assertFalse(cmv.lic8(points, points.length, 1, 1, 4.0));
+    }
+
+    @Test
+    void lic8_returnsFalse_whenNUMPOINTSLessThan5() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0),
+                new Point(4, 0)
+        };
+        assertFalse(cmv.lic8(points, 4, 1, 1, 1.0));
+    }
+
+    @Test
+    void lic8_returnsFalse_whenAPTSLessThan1() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0),
+                new Point(4, 0)
+        };
+        assertFalse(cmv.lic8(points, points.length, 0, 1, 1.0));
+    }
+
+    @Test
+    void lic8_returnsFalse_whenBPTSLessThan1() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0),
+                new Point(4, 0)
+        };
+        assertFalse(cmv.lic8(points, points.length, 1, 0, 1.0));
+    }
+
+    @Test
+    void lic8_returnsFalse_whenSeparationTooLarge() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0),
+                new Point(4, 0)
+        };
+        assertFalse(cmv.lic8(points, points.length, 1, 2, 1.0));
+    }
+
+    @Test
+    void lic8_returnsTrue_whenPointsDoNotFitWithinRadius1() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0),
+                new Point(4, 0)
+        };
+        assertTrue(cmv.lic8(points, points.length, 1, 1, 1.0));
+    }
+
+    @Test
+    void lic8_returnsTrue_whenNonCollinearPointsDoNotFitWithinRadius1() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(1, 1),
+                new Point(2, 0),
+                new Point(3, 0)
+        };
+        assertTrue(cmv.lic8(points, points.length, 1, 1, 1.0));
     }
 
     @Test
