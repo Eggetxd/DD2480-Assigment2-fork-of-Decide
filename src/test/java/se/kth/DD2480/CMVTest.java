@@ -425,6 +425,22 @@ class CMVTest {
     }
 
     @Test
+    void lic8_throwsError_whenRADIUS1LessThan0() {
+        CMV cmv = new CMV();
+        Point[] points = {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0),
+                new Point(4, 0)
+        };
+        AssertionError error = assertThrows(AssertionError.class, () -> {
+            cmv.lic8(points, points.length, 1, 1, -1.0);
+        });
+        assertEquals("'RADIUS1' must be >= 0", error.getMessage());
+    }
+
+    @Test
     void lic8_returnsTrue_whenPointsDoNotFitWithinRadius1() {
         CMV cmv = new CMV();
         Point[] points = {
