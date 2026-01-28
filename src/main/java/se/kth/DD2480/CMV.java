@@ -144,7 +144,7 @@ public class CMV {
     boolean lic7(Point[] points, int NUMPOINTS, double LENGTH1, int K_PTS) {
         assert points != null : "'points' must not be null";
         assert NUMPOINTS >= 3 : "'NUMPOINTS' must be >= 3";
-        assert points.length >= NUMPOINTS : "'points.length' must be >= NUMPOINTS";
+        assert NUMPOINTS == points.length : "'NUMPOINTS' must equal points.length";
         assert K_PTS >= 1 : "'K_PTS' must be >= 1";
         assert K_PTS <= (NUMPOINTS - 2) : "'K_PTS' must be <= NUMPOINTS - 2";
         assert LENGTH1 >= 0 : "'LENGTH1' must be >= 0";
