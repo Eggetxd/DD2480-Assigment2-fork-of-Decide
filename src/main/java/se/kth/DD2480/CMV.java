@@ -170,8 +170,12 @@ public class CMV {
     }
 
     boolean lic13(Point[] points, int NUMPOINTS, int A_PTS, int B_PTS, double RADIUS1, double RADIUS2) {
-        if (points == null || NUMPOINTS < 5 || A_PTS < 1 || B_PTS < 1
-                || (NUMPOINTS - 3) < (A_PTS + B_PTS))  return false;
+        assert points != null : "'points' must not be null";
+        assert NUMPOINTS >= 5 : "'NUMPOINTS' must be >= 5";
+        assert A_PTS >= 1 : "'A_PTS' must be >= 1";
+        assert B_PTS >= 1 : "'B_PTS' must be >= 1";
+        assert A_PTS + B_PTS <= NUMPOINTS - 3 : "A_PTS + B_PTS must be <= NUMPOINTS - 3";
+        assert RADIUS1 >= 0 : "'RADIUS1' must be >= 0";
 
         boolean radius1Contains = true;
         boolean radius2Contains = false;
