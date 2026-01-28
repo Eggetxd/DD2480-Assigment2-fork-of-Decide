@@ -11,4 +11,7 @@ public class PUV {
         this.arr = arr;
     }
 
+    public boolean[] getArray() {
+        return arr;
+    }
 }
