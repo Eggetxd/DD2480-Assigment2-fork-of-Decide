@@ -15,9 +15,11 @@ public class CMV {
     }
 
     boolean lic0( Point[] points, double LENGHT1, int NUMPOINTS) {
-        if(points == null || NUMPOINTS < 2 ){
-            return false;
-        }
+        assert points != null : "'points' must not be null";
+        assert NUMPOINTS >= 2 : "'NUMPOINTS' must be >= 2";
+        assert NUMPOINTS == points.length : "'NUMPOINTS' must equal points.length";
+        assert LENGHT1 >= 0 : "'LENGHT1' must be >= 0";
+
         for (int i = 0; i < NUMPOINTS - 1; ++i) {
             if (points[i].distance(points[i + 1]) > LENGHT1) return true;
         }
