@@ -117,6 +117,10 @@ public class CMV {
         if (points == null || NUMPOINTS < 2) {
             return false;
         }
+        assert points != null : "'points' must not be null";
+        assert NUMPOINTS >= 2 : "'NUMPOINTS' must be >= 2";
+        assert points.length == NUMPOINTS : "'points.length' must be equal 'NUMPOINTS'";
+
         for (int i = 0; i < NUMPOINTS - 1; ++i) {
             if (points[i+1].x - (points[i].x) < 0) return true;
         }
