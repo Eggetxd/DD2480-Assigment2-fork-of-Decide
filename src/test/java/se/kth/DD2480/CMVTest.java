@@ -530,8 +530,138 @@ class CMVTest {
     }
 
     @Test
-    void lic9() {
+    void lic9ReturnsTrueForMinimumCaseWherePointsAreNinetyDegrees() {
+        CMV cmv = new CMV();
+        Point firstPoint = new Point(0, 0);
+        Point secondPoint = new Point(0, 1);
+        Point thirdPoint = new Point(1,0);
+        Point[] degreeVertices90 = {firstPoint,
+                new Point(2, 0),
+                secondPoint,
+                new Point(3, 0),
+                thirdPoint};
+        assertTrue(cmv.lic9(degreeVertices90, 5, 1, 1, 3.1415926535, 0.000001));
     }
+
+    //Forms an angle of 89.95. If epsilon is 100 degrees then expect false.
+    @Test
+    void lic9ReturnsFalseForMinimumCaseWhereAgnleIsNinetyDegreesAndEpsilonIs100Degrees() {
+        CMV cmv = new CMV();
+        Point firstPoint = new Point(0, 0);
+        Point secondPoint = new Point(0, 1);
+        Point thirdPoint = new Point(1,0);
+        Point[] degreeVertices90 = {secondPoint,
+                new Point(2, 0),
+                firstPoint,
+                new Point(3, 0),
+                thirdPoint};
+        assertFalse(cmv.lic9(degreeVertices90, 5, 1, 1, 3.1415926535, 1.80));
+    }
+
+    //Angle is 3.141592653589793 which is 180.00000000044650506
+    //and the PI is 3.1415926535 which is 179.999999995302
+    //We are testing 180.00000000044650506 < (179.999999995302 - 0.0174533)
+    @Test
+    void lic9ReturnsFalseForOppositeVectorsWith180DegreesAngleAndEpsilonIs1Degree() {
+        CMV cmv = new CMV();
+        Point firstPoint = new Point(0,1);
+        Point secondPoint = new Point(0,0);
+        Point thirdPoint = new Point(0,-1);
+        Point[] degreeVertices90 = {firstPoint,
+                new Point(2, 0),
+                secondPoint,
+                new Point(123, 0),
+                thirdPoint};
+        assertFalse(cmv.lic9(degreeVertices90, degreeVertices90.length, 1, 1, 3.1415926535, 0.0174533));
+    }
+
+    //Angle is 3.141592653589793 which is 179.42706130276246768
+    //and the PI is 3.1415926535 which is 179.999999995302
+    //We are testing 179.42706130276246768 < (179.990000329)
+    // Testing the precision when values angle and (PI - Epsilon) are close
+    @Test
+    void lic9ReturnsTrueForOppositeVectorsWith179DegreesAngleAndEpsilonIsExtremelySmall() {
+        CMV cmv = new CMV();
+        Point firstPoint = new Point(0,1);
+        Point secondPoint = new Point(0,0);
+        Point thirdPoint = new Point(0.01,-1);
+        Point[] degreeVertices90 = {firstPoint,
+                new Point(2, 0),
+                secondPoint,
+                new Point(123, 0),
+                thirdPoint};
+        assertTrue(cmv.lic9(degreeVertices90, degreeVertices90.length, 1, 1, 3.1415926535, 0.008000));
+    }
+
+    @Test
+    void lic9TestHandlesThrowsNullCorrectly() {
+        CMV cmv = new CMV();
+        Point[] points = {new Point(0,0), new Point(1,0), new Point(0,1),new Point(0,1),new Point(0,1)};
+        AssertionError err = assertThrows(AssertionError.class, () ->
+                cmv.lic9(null, points.length, 1, 1, 20, 0.6)
+        );
+        assertTrue(err.getMessage().contains("'points' must not be null"));
+    }
+    @Test
+    void lic9TestHandlesThrowsNUMPOINTSCorrectly() {
+        CMV cmv = new CMV();
+        Point[] points = {new Point(0,0), new Point(1,0), new Point(0,1),new Point(0,1),new Point(0,1)};
+        AssertionError err = assertThrows(AssertionError.class, () ->
+                cmv.lic9(points, 4, 1, 1, 20, 0.6)
+        );
+        assertTrue(err.getMessage().contains("'NUMPOINTS' must be >= 5"));
+    }
+    @Test
+    void lic9TestHandlesThrowsC_PTSCorrectly() {
+        CMV cmv = new CMV();
+        Point[] points = {new Point(0,0), new Point(1,0), new Point(0,1),new Point(0,1),new Point(0,1)};
+        AssertionError err = assertThrows(AssertionError.class, () ->
+                cmv.lic9(points, points.length, 0, 1, 20, 0.6)
+        );
+        assertTrue(err.getMessage().contains("'C_PTS' must be >= 1"));
+    }
+    @Test
+    void lic9TestHandlesThrowsD_PTSCorrectly() {
+        CMV cmv = new CMV();
+        Point[] points = {new Point(0,0), new Point(1,0), new Point(0,1),new Point(0,1),new Point(0,1)};
+        AssertionError err = assertThrows(AssertionError.class, () ->
+                cmv.lic9(points, points.length, 1, 0, 20, 0.6)
+        );
+        assertTrue(err.getMessage().contains("'D_PTS' must be >= 1"));
+    }
+    @Test
+    void lic9TestHandlesThrowsIndexBoundaryCorrectly() {
+        CMV cmv = new CMV();
+        Point[] points = {new Point(0,0), new Point(1,0), new Point(0,1),new Point(0,1),new Point(0,1),new Point(0,1),new Point(0,1),new Point(0,1)};
+        AssertionError err = assertThrows(AssertionError.class, () ->
+                cmv.lic9(points, points.length, 5, 1, 20, 0.6)
+        );
+        assertTrue(err.getMessage().contains("C_PTS + D_PTS must be <= NUMPOINTS - 3"));
+    }
+    @Test
+    void lic9TestHandlesThrowsEpsilonLesserThanOneCorrectly() {
+        CMV cmv = new CMV();
+        Point[] points = {new Point(0,0), new Point(1,0), new Point(0,1),new Point(0,1),new Point(0,1)};
+        AssertionError err = assertThrows(AssertionError.class, () ->
+                cmv.lic9(points, points.length, 1, 1, 20, -1)
+        );
+        assertTrue(err.getMessage().contains("'EPSILON' must be >= 0"));
+    }
+    @Test
+    void lic9TestHandlesThrowsEpsilonGreaterEqThanPICorrectly() {
+        CMV cmv = new CMV();
+        Point[] points = {new Point(0,0), new Point(1,0), new Point(0,1),new Point(0,1),new Point(0,1)};
+        AssertionError err = assertThrows(AssertionError.class, () ->
+                cmv.lic9(points, points.length, 1, 1, -1, 0.6)
+        );
+        assertTrue(err.getMessage().contains("'EPSILON' must be lesser than 'PI'"));
+    }
+
+
+
+
+
+
 
     @Test
     void lic10_nullPoints_returnsFalse() {
