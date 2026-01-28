@@ -269,8 +269,29 @@ public class CMV {
         return false;
     }
 
-    boolean lic13() {
-        return false;
+    boolean lic13(Point[] points, int NUMPOINTS, int A_PTS, int B_PTS, double RADIUS1, double RADIUS2) {
+        assert points != null : "'points' must not be null";
+        assert NUMPOINTS >= 5 : "'NUMPOINTS' must be >= 5";
+        assert A_PTS >= 1 : "'A_PTS' must be >= 1";
+        assert B_PTS >= 1 : "'B_PTS' must be >= 1";
+        assert A_PTS + B_PTS <= NUMPOINTS - 3 : "A_PTS + B_PTS must be <= NUMPOINTS - 3";
+        assert RADIUS1 >= 0 : "'RADIUS1' must be >= 0";
+        assert RADIUS2 >= 0 : "'RADIUS2' must be >= 0";
+
+        boolean radius1Contains = true;
+        boolean radius2Contains = false;
+
+        for (int i = 0; i <= NUMPOINTS - 3 - (A_PTS + B_PTS); ++i) {
+            Point a = points[i];
+            Point b = points[i + A_PTS + 1];
+            Point c = points[i + A_PTS + B_PTS + 2];
+
+            double mecRadius = Point.minimalEnclosingCircleRadius(a, b, c);
+            if (mecRadius > RADIUS1) radius1Contains = false;
+            if (mecRadius <= RADIUS2) radius2Contains = true;
+        }
+
+        return !radius1Contains && radius2Contains;
     }
 
     boolean lic14(Point[] points, int NUMPOINTS, int E_PTS, int F_PTS, double AREA1, double AREA2) {
@@ -320,7 +341,7 @@ public class CMV {
         cmv[10] = lic10(points,p.E_PTS,p.F_PTS,p.AREA1,NUMPOINTS);
         cmv[11] = lic11(points, NUMPOINTS, p.G_PTS);
         cmv[12] = lic12(points, NUMPOINTS, p.LENGTH1, p.LENGTH2, p.K_PTS);
-        cmv[13] = lic13();
+        cmv[13] = lic13(points, NUMPOINTS, p.A_PTS, p.B_PTS, p.RADIUS1, p.RADIUS2);
         cmv[14] = lic14(points, NUMPOINTS, p.E_PTS, p.F_PTS, p.AREA1, p.AREA2);
         cmv[15] = lic15();
 
