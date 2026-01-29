@@ -1055,6 +1055,10 @@ class CMVTest {
         assertFalse(cmv.lic10(pts, 1, 1, 2.0, 5)); // NOT >
     }
 
+    /**
+     * Given 2 points separated by G_PTS, returns true  if x-coordinate decreases.
+     * the method returns true since the last points x-coordinate is less than the rest
+     */
     @Test
     void lic11_returnsTrueForLastThreeElements() {
         CMV cmv = new CMV();
@@ -1069,6 +1073,10 @@ class CMVTest {
         assertTrue(cmv.lic11(points, points.length, 1));
     }
 
+    /**
+     * Given 2 points separated by G_PTS, returns true  if x-coordinate decreases.
+     * the method returns false since the x-coordinates are rising
+     */
     @Test
     void lic11_returnsFalseForRisingXValues() {
         CMV cmv = new CMV();
@@ -1083,6 +1091,11 @@ class CMVTest {
         assertFalse(cmv.lic11(points, points.length, 1));
     }
 
+    /**
+     * The method requires 'points' to be non-null.
+     * If points == null, the method throws AssertionError
+     * with message "'points' must not be null".
+     */
     @Test
     void lic11_throwErrorWhenPointsIsNull() {
         CMV cmv = new CMV();
@@ -1092,6 +1105,11 @@ class CMVTest {
         assertEquals("'points' must not be null", error.getMessage());
     }
 
+    /**
+     * The method requires 'NUMPOINTS' >= 3.
+     * If NUMPOINTS < 3, the method throws AssertionError
+     * with message "'NUMPOINTS' must be >= 3".
+     */
     @Test
     void lic11_throwErrorWhenNUMPOINTSIsLessThan3() {
         CMV cmv = new CMV();
@@ -1105,6 +1123,11 @@ class CMVTest {
         assertEquals("'NUMPOINTS' must be >= 3", error.getMessage());
     }
 
+    /**
+     * The method requires 'NUMPOINTS' == 'points.length'.
+     * If NUMPOINTS != 'points.length', the method throws AssertionError
+     * with message "'NUMPOINTS' must equal points.length".
+     */
     @Test
     void lic11_throwErrorWhenNUMPOINTSNotSameAsNumOfPoints() {
         CMV cmv = new CMV();
@@ -1121,6 +1144,11 @@ class CMVTest {
         assertEquals("'NUMPOINTS' must equal points.length", error.getMessage());
     }
 
+    /**
+     * The method requires 'G_PTS' >= 1.
+     * If 'G_PTS' < 1, the method throws AssertionError
+     * with message "'G_PTS' must be >= 1".
+     */
     @Test
     void lic11_throwErrorWhenG_PTSIsLessThan1() {
         CMV cmv = new CMV();
@@ -1137,6 +1165,11 @@ class CMVTest {
         assertEquals("'G_PTS' must be >= 1", error.getMessage());
     }
 
+    /**
+     * The method requires 'G_PTS' <= NUMPOINTS - 2.
+     * If 'G_PTS' > NUMPOINTS - 2, the method throws AssertionError
+     * with message "'G_PTS' must be <= NUMPOINTS - 2".
+     */
     @Test
     void lic11_throwErrorWhenG_PTSIsLargerThanNUMPOINTSMinusTwo() {
         CMV cmv = new CMV();
