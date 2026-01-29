@@ -22,17 +22,43 @@ class CMVTest {
     }
 
     @Test
-    void lic0_nullPoints_returnsFalse() {
+    void lic0_throwErrorWhenPointsIsNull() {
         CMV cmv = new CMV();
-        assertFalse(cmv.lic0(null, 1.0, 2));
+
+        AssertionError error = assertThrows(AssertionError.class, () -> {
+            cmv.lic0(null, 1.0, 2);
+        });
+        assertEquals("'points' must not be null", error.getMessage());
     }
 
     @Test
-    void lic0_NUMPOINTS_lessThan2_returnsFalse() {
+    void lic0_throwErrorWhenNUMPOINTSIsLessThan2() {
+        CMV cmv = new CMV();
+        Point[] pts = { new Point(0, 0)};
+        AssertionError error = assertThrows(AssertionError.class, () -> {
+            cmv.lic0(pts, 1.0, pts.length);
+        });
+        assertEquals("'NUMPOINTS' must be >= 2", error.getMessage());
+    }
+
+    @Test
+    void lic0_throwErrorWhenNUMPOINTSNotSameAsNumOfPoints() {
         CMV cmv = new CMV();
         Point[] pts = { new Point(0, 0), new Point(10, 0) };
-        assertFalse(cmv.lic0(pts, 1.0, 0));
-        assertFalse(cmv.lic0(pts, 1.0, 1));
+        AssertionError error = assertThrows(AssertionError.class, () -> {
+            cmv.lic0(pts, 1.0, 5);
+        });
+        assertEquals("'NUMPOINTS' must equal points.length", error.getMessage());
+    }
+
+    @Test
+    void lic0_throwErrorWhenLENGTH1IsLessThan0() {
+        CMV cmv = new CMV();
+        Point[] pts = { new Point(0, 0), new Point(10, 0) };
+        AssertionError error = assertThrows(AssertionError.class, () -> {
+            cmv.lic0(pts, -1, pts.length);
+        });
+        assertEquals("'LENGHT1' must be >= 0", error.getMessage());
     }
 
     @Test
