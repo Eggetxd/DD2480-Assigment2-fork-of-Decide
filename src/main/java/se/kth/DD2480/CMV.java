@@ -263,8 +263,13 @@ public class CMV {
     }
 
     boolean lic12(Point[] points, int NUMPOINTS, double LENGTH1, double LENGTH2, int K_PTS) {
-        if (points == null || NUMPOINTS < 3 || points.length < NUMPOINTS || K_PTS < 1 || K_PTS > NUMPOINTS - 2 || LENGTH2 < 0)
-            return false;
+        assert points != null : "'points' must not be null";
+        assert NUMPOINTS >= 3 : "'NUMPOINTS' must be >= 3";
+        assert NUMPOINTS == points.length : "'NUMPOINTS' must equal points.length";
+        assert K_PTS >= 1 : "'K_PTS' must be >= 1";
+        assert K_PTS <= NUMPOINTS - 2 : "'K_PTS' must be <= NUMPOINTS - 2";
+        assert LENGTH1 >= 0 : "'LENGTH1' must be >= 0";
+        assert LENGTH2 >= 0 : "'LENGTH2' must be >= 0";
 
         // Represents the two pairs of points to match greater than LENGTH1 and LENGTH2 respectively
         boolean pair1 = false;
