@@ -25,7 +25,7 @@ and run:
 ```java -ea se.kth.DD2480.Main```
 
 Running the above will generate the .class files within the same \src folder. To put them where they belong we can instead:  
-```javac -d ..\..\..\out se\kth\DD2480\Java.Main```  
+```javac -d ..\..\..\out se\kth\DD2480\*.java```  
 ```java -ea -cp ..\..\..\out se.kth.DD2480.Main```
 
 The -d flag ensures that the .class files end up in the specified directory, and the -cp flag tells the JVM to look for the .class files in that specified directory.
