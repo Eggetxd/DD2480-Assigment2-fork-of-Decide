@@ -7,7 +7,7 @@ public class Main {
         DECIDE();
     }
 
-    private static void DECIDE() {
+    static void DECIDE() {
         PUV puv = PUV.createPUV(1);
         LCM lcm = LCM.createLCM(1);
         Parameters params  = Parameters.createParameters(1);
