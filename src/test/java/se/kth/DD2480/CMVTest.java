@@ -926,7 +926,11 @@ class CMVTest {
         assertEquals("'LENGTH1' must be >= 0", error.getMessage());
     }
 
-
+    /**
+     * Given a set of data points separated by exactly A_PTS and B_PTS consecutive intervening
+     * points, respectively, that can be contained within a circle of radius RADIUS1,
+     * lic8() returns false.
+     */
     @Test
     void lic8_returnsFalse_whenPointsFitWithinRadius1() {
         CMV cmv = new CMV();
@@ -940,6 +944,11 @@ class CMVTest {
         assertFalse(cmv.lic8(points, points.length, 1, 1, 10.0));
     }
 
+    /**
+     * Given a set of data points separated by exactly A_PTS and B_PTS consecutive intervening
+     * points, respectively, that can be contained on a circle of radius RADIUS1,
+     * lic8() returns false.
+     */
     @Test
     void lic8_returnsFalse_whenPointsFitOnRadius1() {
         CMV cmv = new CMV();
@@ -953,6 +962,11 @@ class CMVTest {
         assertFalse(cmv.lic8(points, points.length, 1, 1, 4.0));
     }
 
+    /**
+     * The method requires 'NUMPOINTS' >= 5.
+     * If NUMPOINTS < 5, the method throws AssertionError
+     * with message "'NUMPOINTS' must be >= 5".
+     */
     @Test
     void lic8_throwsError_whenNUMPOINTSLessThan5() {
         CMV cmv = new CMV();
@@ -969,6 +983,11 @@ class CMVTest {
         assertEquals("'NUMPOINTS' must be >= 5", error.getMessage());
     }
 
+    /**
+     * The method requires 'A_PTS' >= 1.
+     * If A_PTS < 1, the method throws AssertionError
+     * with message "'A_PTS' must be >= 1".
+     */
     @Test
     void lic8_throwsError_whenAPTSLessThan1() {
         CMV cmv = new CMV();
@@ -985,6 +1004,11 @@ class CMVTest {
         assertEquals("'A_PTS' must be >= 1", error.getMessage());
     }
 
+    /**
+     * The method requires 'B_PTS' >= 1.
+     * If B_PTS < 1, the method throws AssertionError
+     * with message "'B_PTS' must be >= 1".
+     */
     @Test
     void lic8_throwsError_whenBPTSLessThan1() {
         CMV cmv = new CMV();
@@ -1001,6 +1025,11 @@ class CMVTest {
         assertEquals("'B_PTS' must be >= 1", error.getMessage());
     }
 
+    /**
+     * The method requires A_PTS + B_PTS <= NUMPOINTS - 3.
+     * If A_PTS + B_PTS > NUMPOINTS - 3, the method throws AssertionError
+     * with message "A_PTS + B_PTS must be <= NUMPOINTS - 3".
+     */
     @Test
     void lic8_throwsError_whenSeparationTooLarge() {
         CMV cmv = new CMV();
@@ -1017,6 +1046,11 @@ class CMVTest {
         assertEquals("A_PTS + B_PTS must be <= NUMPOINTS - 3", error.getMessage());
     }
 
+    /**
+     * The method requires RADIUS1 >= 0.
+     * If RADIUS1 < 0, the method throws AssertionError
+     * with message "'RADIUS1' must be >= 0".
+     */
     @Test
     void lic8_throwsError_whenRADIUS1LessThan0() {
         CMV cmv = new CMV();
@@ -1033,6 +1067,12 @@ class CMVTest {
         assertEquals("'RADIUS1' must be >= 0", error.getMessage());
     }
 
+    /**
+     * Given a set of collinear data points separated by exactly
+     * A_PTS and B_PTS consecutive intervening points, respectively,
+     * that cannot be contained within a circle of radius RADIUS1,
+     * lic8() returns true.
+     */
     @Test
     void lic8_returnsTrue_whenPointsDoNotFitWithinRadius1() {
         CMV cmv = new CMV();
@@ -1046,6 +1086,12 @@ class CMVTest {
         assertTrue(cmv.lic8(points, points.length, 1, 1, 1.0));
     }
 
+    /**
+     * Given a set of non-collinear data points separated by exactly
+     * A_PTS and B_PTS consecutive intervening points, respectively,
+     * that cannot be contained within a circle of radius RADIUS1,
+     * lic8() returns true.
+     */
     @Test
     void lic8_returnsTrue_whenNonCollinearPointsDoNotFitWithinRadius1() {
         CMV cmv = new CMV();
