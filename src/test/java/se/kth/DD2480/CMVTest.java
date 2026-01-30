@@ -1751,9 +1751,21 @@ class CMVTest {
         assertTrue(cmv.lic13(points, points.length, 1, 1, 99.0, 2.0));
     }
 
-    //This test tests that the comparisons with AREA1 and AREA2 works as intended.
-    //We modify the values for AREA1 and AREA2 and see that their results are consistent.
-    //Area is 0.5 between firstPoint, secondPoint, thirdPoint.
+
+    /**
+     * Given valid inputs, lic 14 returns true iff there exists at least one set of three points,
+     * where first and second point are separated by E_PTS consecutive intervening points,
+     * and the second and third point are separated by F_PTS consecutive intervening points.
+     * The points form the vertices of a triangle greater than AREA1.
+     * Additionally, there exists a similar triangle but with area lesser than AREA2.
+     *
+     * In this test, the selected points (firstPoint, secondPoint, thirdPoint) form a triangle with area = 0.5
+     * Therefore:
+     * - When AREA1 = 5 and AREA2 = 10, then 0.5 > AREA1 is false so lic 9 must return false.
+     * - When AREA1 = 0.4 and AREA2 = 10, then both 0.5 > AREA1 and 0.5 < AREA2 is true so lic 9 must return true.
+     * - When AREA1 = 0.4 and AREA2 = 0.6, then both 0.5 > AREA1 and 0.5 < AREA2 is true so lic 9 must return true.
+     * - When AREA2 = 0.4 and AREA2 = 0.6, then 0.5 < AREA2 is false so lic 9 must return false.
+     */
     @Test
     void lic14TestThatAREA1AndAREA2ConditionsWorkCorrectlyWhenFirstInArray() {
         CMV cmv = new CMV();
@@ -1765,13 +1777,24 @@ class CMVTest {
                 secondPoint,
                 new Point(0, 0),
                 thirdPoint};
-        assertFalse(cmv.lic14(pts, 5, 1, 1, 5, 10)); //0.5>AREA1 false when AREA1=5
-        assertTrue(cmv.lic14(pts, 5, 1, 1, 0.4, 10)); //0.5>AREA1 true when AREA1=0.4
-        assertTrue(cmv.lic14(pts, 5, 1, 1, 0.4, 0.6)); //0.6<AREA2 true AREA2=0.6
-        assertFalse(cmv.lic14(pts, 5, 1, 1, 0.4, 0.4)); //0.6<AREA2 false AREA2=0.4
+        assertFalse(cmv.lic14(pts, 5, 1, 1, 5, 10));
+        assertTrue(cmv.lic14(pts, 5, 1, 1, 0.4, 10));
+        assertTrue(cmv.lic14(pts, 5, 1, 1, 0.4, 0.6));
+        assertFalse(cmv.lic14(pts, 5, 1, 1, 0.4, 0.4));
     }
 
-    //Area is 0.5 between firstPoint, secondPoint, thirdPoint.
+    /**
+     * Given valid inputs, lic 14 returns true iff there exists at least one set of three points,
+     * where first and second point are separated by E_PTS consecutive intervening points,
+     * and the second and third point are separated by F_PTS consecutive intervening points.
+     * The points form the vertices of a triangle greater than AREA1.
+     * Additionally, there exists a similar triangle but with area lesser than AREA2.
+     *
+     * In this test, the selected points (firstPoint, secondPoint, thirdPoint) form a triangle with area = 0.5
+     * Therefore:
+     * - When AREA1 = 0.4 and AREA2 = 10, then both 0.5 > AREA1 and 0.5 < AREA2 is true so lic 9 must return true.
+     * - When AREA1 = 0.6 and AREA2 = 10, then 0.5 > AREA1 is false so lic 9 must return false.
+     */
     @Test
     void lic14TestThatAREA1AndAREA2ConditionsWorkCorrectlyWhenNotFirstInArray() {
         CMV cmv = new CMV();
@@ -1789,7 +1812,23 @@ class CMVTest {
         assertFalse(cmv.lic14(points, points.length, 1, 1, 0.6, 10));
     }
 
-    //Area is 0.5 between firstPoint, secondPoint, thirdPoint.
+    /**
+     * Given valid inputs, lic 14 returns true iff there exists at least one set of three points,
+     * where first and second point are separated by E_PTS consecutive intervening points,
+     * and the second and third point are separated by F_PTS consecutive intervening points.
+     * The points form the vertices of a triangle greater than AREA1.
+     * Additionally, there exists a similar triangle but with area lesser than AREA2.
+     *
+     * In this test:
+     * - The selected points (firstPoint, secondPoint, thirdPoint) form a triangle with area = 0.5
+     * - The selected points (firstPoint2, secondPoint2, thirdPoint2) form a triangle with area = 25
+     * They are placed pairwise such that with E_PTS = 1 and F_PTS = 1 the only possible configurations are from
+     * the triplets (firstPoint, secondPoint, thirdPoint) and (firstPoint2, secondPoint2, thirdPoint2).
+     * Therefore:
+     * - When AREA1 = 20 and AREA2 = 0.6, then 25 > AREA1 and 0.5 < AREA2 is true so lic 9 must return true.
+     * - When AREA1 = 25 and AREA2 = 0.6, then both 0.5 > AREA1 and 25 > AREA1 is false so lic 9 must return false.
+     * - When AREA1 = 20 and AREA2 = 0.5, then both 0.5 < AREA2 and 25 < AREA2 is false so lic 9 must return false.
+     */
     @Test
     void lic14TestThatAREA1AndAREA2ConditionsWorkCorrectlyWhenDifferentTriples() {
         CMV cmv = new CMV();
@@ -1815,6 +1854,11 @@ class CMVTest {
         assertFalse(cmv.lic14(points, points.length, 1, 1, 20, 0.5)); //Boundary condition, fails because 0.5<0.5 returns false
     }
 
+    /**
+     * Lic 14 requires that no points are null.
+     * If points == null, the method throws an AssertionError with message "'points' must not be null".
+     * In this test, points is given to lic 14 as null so lic 14 must throw an AssertionError with the expected message.
+     */
     @Test
     void lic14TestHandlesThrowsNullCorrectly() {
         CMV cmv = new CMV();
@@ -1825,6 +1869,11 @@ class CMVTest {
         assertTrue(err.getMessage().contains("'points' must not be null"));
     }
 
+    /**
+     * Lic 14 requires that NUMPOINTS must be >= 5.
+     * If NUMPOINTS < 5, the method throws an AssertionError with message "'NUMPOINTS' must be >= 5".
+     * In this test, NUMPOINTS is given with value 4, so lic 14 must throw an AssertionError with the expected message.
+     */
     @Test
     void lic14TestHandlesThrowsNUMPOINTSCorrectly() {
         CMV cmv = new CMV();
@@ -1835,6 +1884,11 @@ class CMVTest {
         assertTrue(err.getMessage().contains("'NUMPOINTS' must be >= 5"));
     }
 
+    /**
+     * Lic 14 requires that E_PTS + F_PTS must be <= NUMPOINTS - 3.
+     * If E_PTS + F_PTS must be <= NUMPOINTS - 3, the method throws an AssertionError with message "E_PTS + F_PTS must be <= NUMPOINTS - 3".
+     * In this test, E_PTS = 5, F_PTS = 1 and NUMPOINTS = 8 thus 5 + 1 > 8-3 so lic 14 must throw an AssertionError with the expected message.
+     */
     @Test
     void lic14TestHandlesThrowsIndexBoundaryCorrectly() {
         CMV cmv = new CMV();
@@ -1845,6 +1899,11 @@ class CMVTest {
         assertTrue(err.getMessage().contains("E_PTS + F_PTS must be <= NUMPOINTS - 3"));
     }
 
+    /**
+     * Lic 14 requires that E_PTS must be >= 1.
+     * If E_PTS < 1, the method throws an AssertionError with message "'E_PTS' must be >= 1".
+     * In this test, E_PTS is given with value 0, so lic 14 must throw an AssertionError with the expected message.
+     */
     @Test
     void lic14TestHandlesThrowsE_PTSCorrectly() {
         CMV cmv = new CMV();
@@ -1855,6 +1914,11 @@ class CMVTest {
         assertTrue(err.getMessage().contains("'E_PTS' must be >= 1"));
     }
 
+    /**
+     * Lic 14 requires that F_PTS must be >= 1.
+     * If F_PTS < 1, the method throws an AssertionError with message "'F_PTS' must be >= 1".
+     * In this test, F_PTS is given with value 0, so lic 14 must throw an AssertionError with the expected message.
+     */
     @Test
     void lic14TestHandlesThrowsF_PTSCorrectly() {
         CMV cmv = new CMV();
@@ -1865,6 +1929,11 @@ class CMVTest {
         assertTrue(err.getMessage().contains("'F_PTS' must be >= 1"));
     }
 
+    /**
+     * Lic 14 requires that AREA1 must be >= 0.
+     * If AREA1 < 0, the method throws an AssertionError with message "'AREA1' must be >= 0".
+     * In this test, AREA1 is given with value -1, so lic 14 must throw an AssertionError with the expected message.
+     */
     @Test
     void lic14TestHandlesThrowsAREA1Correctly() {
         CMV cmv = new CMV();
@@ -1875,6 +1944,11 @@ class CMVTest {
         assertTrue(err.getMessage().contains("'AREA1' must be >= 0"));
     }
 
+    /**
+     * Lic 14 requires that AREA2 must be >= 0.
+     * If AREA2 < 0, the method throws an AssertionError with message "'AREA2' must be >= 0".
+     * In this test, AREA2 is given with value -1, so lic 14 must throw an AssertionError with the expected message.
+     */
     @Test
     void lic14TestHandlesThrowsAREA2Correctly() {
         CMV cmv = new CMV();
