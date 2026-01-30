@@ -397,9 +397,9 @@ class CMVTest {
     }
 
     /**
-     * With Q_PTS = 2 and QUADS = 1 lic4 will return true iff there exists two consecutive points that cover more than
-     * 1 quadrant.
-     * In this test, the two points belong to two distinct quadrants and lie consecutively, therefore lic4 must return true.
+     * With Q_PTS = 3 and QUADS = 2 lic4 will return true iff there exists three consecutive points that cover more than
+     * 2 quadrant.
+     * In this test, the three first points belong to three distinct quadrants and lie consecutively, therefore lic4 must return true.
      */
     @Test
     void lic4_ReturnsTrueForConsecutivelyPlacedCorrectElementsAreFirstInPointsArray() {
@@ -409,7 +409,7 @@ class CMVTest {
     }
 
     /**
-     * With Q_PTS = 3 and QUADS = 2 lic4 will return true iff there exists two consecutive points that cover more than 1 quadrant.
+     * With Q_PTS = 3 and QUADS = 2 lic4 will return true iff there exists two consecutive points that cover more than 2 quadrant.
      * In this test, the last three points cover three distinct quadrants, so lic4 must return true.
      */
     @Test
@@ -420,7 +420,7 @@ class CMVTest {
     }
 
     /**
-     * With Q_PTS = 3, QUADS = 2 lic4 will return true iff there exists two consecutive points that cover more than 2 distinct quadrants.
+     * With Q_PTS = 3, QUADS = 2 lic4 will return true iff there exists three consecutive points that cover more than 2 distinct quadrants.
      * In this test, no Q_PTS consecutive points of three cover more than two quadrants so lic 4 must return false.
      */
     @Test
