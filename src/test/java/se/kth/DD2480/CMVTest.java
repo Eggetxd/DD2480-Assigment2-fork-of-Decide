@@ -1728,7 +1728,7 @@ class CMVTest {
      *      contained within or on a circle of radius RADIUS2, and
      *    - the three data points are separated by exactly A_PTS and B_PTS
      *      consecutive intervening points, respectively, in both sets,
-     * lic13() returns false since no set of data points can contained in a circle of RADIUS2.
+     * lic13() returns false since no set of data points can be contained in a circle of RADIUS2.
      */
     @Test
     void lic13_returnsFalse_radius1CannotContain_radius2CannotContain() {
@@ -1751,7 +1751,7 @@ class CMVTest {
      *      contained within or on a circle of radius RADIUS2, and
      *    - the three data points are separated by exactly A_PTS and B_PTS
      *      consecutive intervening points, respectively, in both sets,
-     * lic13() returns false since no set of data points cannot be contained in a circle of RADIUS1.
+     * lic13() returns false since a set of data points can be contained in a circle of RADIUS1.
      */
     @Test
     void lic13_returnsFalse_radius1CanContain_radius2CanContain() {
@@ -1774,7 +1774,7 @@ class CMVTest {
      *      contained within or on a circle of radius RADIUS2, and
      *    - the three data points are separated by exactly A_PTS and B_PTS
      *      consecutive intervening points, respectively, in both sets,
-     * lic13() returns false since no set of data points cannot be contained in a circle of RADIUS1
+     * lic13() returns false since a set of data points can be contained in a circle of RADIUS1
      * and no set of data points can be contained in a circle of RADIUS2.
      */
     @Test
