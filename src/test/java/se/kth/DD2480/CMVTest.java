@@ -32,6 +32,7 @@ class CMVTest {
             cmv.lic0(null, 1.0, 2);
         });
         assertEquals("'points' must not be null", error.getMessage());
+        assertTrue(false);
     }
 
     /**
